@@ -1,0 +1,25 @@
+# Dependências
+node_modules/
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+
+# Build output (Next.js cache e exportação estática)
+.next/
+out/
+
+# Ambiente e logs
+.env
+.env*.local
+*.log
+npm-debug.log*
+
+# Sistema e editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Testes (Playwright)
+playwright-report/
+test-results/
