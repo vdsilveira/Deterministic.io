@@ -4,6 +4,33 @@ import { useState, useCallback } from 'react';
 import { processInputs } from '@/lib/bip39';
 import { mnemonicToSeed, deriveKeyPair } from '@/lib/bitcoin';
 
+const translations = {
+  'pt-BR': {
+    heroSubtitle: 'Gere endereços Bitcoin seguros a partir de 11 textos ou arquivos. Cada campo = 1 input. Preencha todos os 11 campos.',
+    cta: 'Começar',
+    inputPlaceholder: (id: number) => `Campo ${id}: Digite texto ou carregue arquivo...`,
+    error: (count: number) => `Você precisa preencher todos os 11 campos. Atual: ${count}/11`,
+    clearAll: 'Limpar Tudo',
+    generate: 'GERAR CHAVES',
+    generating: 'GERANDO...',
+    resultAddresses: 'ENDEREÇOS',
+    resultWif: 'CHAVE PRIVADA (WIF)',
+    warning: '⚠️ Aviso: Este site é apenas para fins educacionais. Não use com valores reais.',
+  },
+  en: {
+    heroSubtitle: 'Securely generate Bitcoin addresses from 11 texts or files. Each field = 1 input. Fill all 11 fields.',
+    cta: 'Get Started',
+    inputPlaceholder: (id: number) => `Field ${id}: Type text or upload file...`,
+    error: (count: number) => `You need to fill all 11 fields. Current: ${count}/11`,
+    clearAll: 'Clear All',
+    generate: 'GENERATE KEYS',
+    generating: 'GENERATING...',
+    resultAddresses: 'ADDRESSES',
+    resultWif: 'PRIVATE KEY (WIF)',
+    warning: '⚠️ Warning: This site is for educational purposes only. Do not use with real funds.',
+  },
+};
+
 interface InputField {
   id: number;
   type: 'text' | 'file';
@@ -19,6 +46,9 @@ export interface Result {
 }
 
 export default function Home() {
+  const [language, setLanguage] = useState<'pt-BR' | 'en'>('pt-BR');
+  const t = translations[language];
+
   const [inputs, setInputs] = useState<InputField[]>(
     Array.from({ length: 11 }, (_, i) => ({ id: i + 1, type: 'text', content: '', fileName: undefined }))
   );
@@ -64,10 +94,10 @@ export default function Home() {
   const handleGenerate = async () => {
     setError('');
     
-    if (filledCount < 11) {
-      setError(`Você precisa preencher todos os 11 campos. Atual: ${filledCount}/11`);
-      return;
-    }
+      if (filledCount < 11) {
+        setError(t.error(filledCount));
+        return;
+      }
 
     setLoading(true);
     try {
@@ -106,8 +136,11 @@ export default function Home() {
   return (
     <div className="container">
       <div className="utility-bar">
-        <span className="logo">BTC Key Generator</span>
+        <span className="logo">Deterministic</span>
         <div className="links">
+          <button className="lang-toggle" onClick={() => setLanguage(language === 'pt-BR' ? 'en' : 'pt-BR')}>
+            {language === 'pt-BR' ? '🇺🇸 EN' : '🇧🇷 PT'}
+          </button>
           <span>GitHub</span>
           <span>Docs</span>
         </div>
@@ -117,10 +150,10 @@ export default function Home() {
       <div className="hero-grid">
         {/* Title Tile - Inverse */}
         <div className="title-tile">
-          <h1>Gerador de Chaves Bitcoin</h1>
-          <p>Gere endereços Bitcoin seguros a partir de 11 textos ou arquivos. Cada campo = 1 input. Preencha todos os 11 campos.</p>
+          <h1>Deterministic</h1>
+          <p>{t.heroSubtitle}</p>
           <button className="cta-button" onClick={() => document.getElementById('input-section')?.scrollIntoView({ behavior: 'smooth' })}>
-            Começar
+            {t.cta}
           </button>
         </div>
 
@@ -139,7 +172,7 @@ export default function Home() {
                 <span className="field-number">[{input.id}]</span>
                 <textarea
                   className="field-input"
-                  placeholder={`Campo ${input.id}: Digite texto ou carregue arquivo...`}
+                  placeholder={t.inputPlaceholder(input.id)}
                   value={input.type === 'text' ? input.content : ''}
                   onChange={(e) => updateInput(input.id, e.target.value)}
                   disabled={input.type === 'file'}
@@ -170,14 +203,14 @@ export default function Home() {
 
           <div className="btn-group">
             <button className="btn-secondary" onClick={clearAll}>
-              Limpar Tudo
+              {t.clearAll}
             </button>
             <button 
               className="generate-button" 
               onClick={handleGenerate}
               disabled={filledCount < 11 || loading}
             >
-              {loading ? 'GERANDO...' : 'GERAR CHAVES'}
+              {loading ? t.generating : t.generate}
             </button>
           </div>
 
@@ -189,7 +222,7 @@ export default function Home() {
                 <button className="copy-btn" onClick={() => copyToClipboard(result.seedPhrase)}>Copy</button>
               </div>
 
-              <span className="result-label">ENDEREÇOS</span>
+               <span className="result-label">{t.resultAddresses}</span>
               <div className="address-grid">
                 <div className="address-card">
                   <span className="bip-badge">BIP84</span>
@@ -208,7 +241,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <span className="result-label">CHAVE PRIVADA (WIF)</span>
+               <span className="result-label">{t.resultWif}</span>
               <div className="wif-value">
                 {result.bip84.wif}
                 <button className="copy-btn" onClick={() => copyToClipboard(result.bip84.wif)}>Copy</button>
@@ -243,7 +276,7 @@ export default function Home() {
 
       {/* Warning */}
       <div className="warning">
-        <span className="warning-text">⚠️ Aviso: Este site é apenas para fins educacionais. Não use com valores reais.</span>
+        <span className="warning-text">{t.warning}</span>
       </div>
     </div>
   );

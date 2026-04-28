@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Gerador de Chaves Bitcoin',
-  description: 'Gere endereços Bitcoin e chaves privadas a partir de texto ou arquivos',
+  title: 'Deterministic',
+  description: 'Gere endereços Bitcoin e chaves privadas deterministicamente a partir de 11 textos ou arquivos',
 };
 
 export default function RootLayout({
