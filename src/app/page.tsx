@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import Image from 'next/image';
 import { processInputs } from '@/lib/bip39';
 import { mnemonicToSeed, deriveKeyPair } from '@/lib/bitcoin';
 
@@ -136,7 +137,6 @@ export default function Home() {
   return (
     <div className="container">
       <div className="utility-bar">
-        <span className="logo">Deterministic</span>
         <div className="links">
           <button className="lang-toggle" onClick={() => setLanguage(language === 'pt-BR' ? 'en' : 'pt-BR')}>
             {language === 'pt-BR' ? '🇺🇸 EN' : '🇧🇷 PT'}
@@ -150,6 +150,9 @@ export default function Home() {
       <div className="hero-grid">
         {/* Title Tile - Inverse */}
         <div className="title-tile">
+          <div className="logo-bg">
+            <Image src="/images/logo.png" alt="Deterministic" fill className="logo-img" />
+          </div>
           <h1>Deterministic</h1>
           <p>{t.heroSubtitle}</p>
           <button className="cta-button" onClick={() => document.getElementById('input-section')?.scrollIntoView({ behavior: 'smooth' })}>
