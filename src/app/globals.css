@@ -31,14 +31,13 @@ body {
 .container {
   max-width: 100%;
   padding: 32px;
-  min-height: 100vh;
 }
 
 /* Hero Grid - Bento Style */
 .hero-grid {
   display: flex;
   gap: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .hero-grid > * {
@@ -93,7 +92,7 @@ body {
   padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .input-label {
@@ -142,7 +141,7 @@ body {
   justify-content: center;
   align-items: center;
   gap: 32px;
-  padding: 24px 0;
+  padding: 16px 0;
 }
 
 .trust-strip span {
@@ -154,7 +153,7 @@ body {
 .features-grid {
   display: flex;
   gap: 16px;
-  margin-top: 24px;
+  margin-top: 16px;
 }
 
 .feature-card {
@@ -177,20 +176,6 @@ body {
 .feature-desc {
   font-size: 12px;
   color: var(--foreground-secondary);
-}
-
-/* Warning */
-.warning {
-  background: #FFF3E0;
-  border-radius: var(--rounded-lg);
-  padding: 16px;
-  margin-top: 24px;
-  text-align: center;
-}
-
-.warning-text {
-  font-size: 12px;
-  color: #E65100;
 }
 
 /* Utility bar */
@@ -357,7 +342,7 @@ body {
   flex-direction: column;
   gap: 8px;
   overflow-y: auto;
-  max-height: 300px;
+  max-height: 250px;
   padding-right: 8px;
 }
 
@@ -475,7 +460,7 @@ body {
 
 /* Generate header */
 .generate-header {
-  margin: 24px 0 16px;
+  margin: 16px 0 12px;
   text-align: center;
 }
 
@@ -519,38 +504,6 @@ body {
   opacity: 0.9;
 }
 
-/* Executable section */
-.executable-section {
-  margin-top: 24px;
-  text-align: center;
-}
-
-.executable-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  background: var(--surface-secondary);
-  border: 1px solid var(--foreground-muted);
-  border-radius: var(--rounded-lg);
-  font-size: 14px;
-  color: var(--foreground-secondary);
-  cursor: pointer;
-}
-
-.executable-btn.disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.coming-soon-badge {
-  font-size: 10px;
-  padding: 2px 8px;
-  background: var(--surface-primary);
-  border-radius: var(--rounded-full);
-  color: var(--foreground-muted);
-}
-
 /* Links in utility bar */
 .links a {
   font-size: 12px;
@@ -560,4 +513,246 @@ body {
 
 .links a:hover {
   color: var(--accent-primary);
+}
+
+/* Download page */
+.download-header {
+  margin: 16px 0 12px;
+  text-align: center;
+}
+
+.download-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--foreground-primary);
+  margin-bottom: 8px;
+}
+
+.download-header p {
+  font-size: 14px;
+  color: var(--foreground-secondary);
+}
+
+.offline-copy {
+  background: var(--surface-secondary);
+  border-radius: var(--rounded-xl);
+  padding: 24px;
+  font-size: 14px;
+  color: var(--foreground-secondary);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.download-grid {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.download-card {
+  flex: 1;
+  background: var(--surface-secondary);
+  border-radius: var(--rounded-2xl);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.os-icon {
+  font-size: 48px;
+  margin-bottom: 8px;
+}
+
+.download-card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--foreground-primary);
+}
+
+.download-card-link {
+  display: inline-flex;
+  padding: 10px 20px;
+  background: var(--accent-primary);
+  border-radius: var(--rounded-full);
+  font-size: 12px;
+  font-weight: 600;
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.download-card-link:hover {
+  opacity: 0.9;
+}
+
+.entropy-warning {
+  background: #FFF3E0;
+  border: 1px solid #FFB74D;
+  border-radius: var(--rounded-xl);
+  padding: 20px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: #E65100;
+  line-height: 1.6;
+}
+
+/* Update executable section */
+.executable-section {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.executable-desc {
+  font-size: 14px;
+  color: var(--foreground-secondary);
+  margin-bottom: 12px;
+}
+
+.executable-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--accent-primary);
+  border: none;
+  border-radius: var(--rounded-lg);
+  font-size: 14px;
+  font-weight: 600;
+  color: #000;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.executable-btn:hover {
+  opacity: 0.9;
+}
+
+.os-logo-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+.executable-desc {
+  font-size: 16px;
+  color: var(--foreground-primary);
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.offline-copy p {
+  margin-bottom: 12px;
+}
+
+.offline-copy p:last-child {
+  margin-bottom: 0;
+}
+
+/* Footer */
+.footer {
+  background: var(--surface-inverse);
+  color: var(--foreground-inverse);
+  padding: 32px 32px;
+  margin-top: 32px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.footer-subtitle {
+  font-size: 13px;
+  opacity: 0.8;
+  max-width: 600px;
+  margin: 0 auto 24px;
+  line-height: 1.6;
+}
+
+.donation-grid {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.donation-card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--rounded-xl);
+  padding: 16px;
+  flex: 1;
+  max-width: 300px;
+  min-width: 250px;
+  text-align: center;
+}
+
+.donation-icon {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.donation-type {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.qr-code {
+  background: white;
+  padding: 8px;
+  border-radius: var(--rounded-lg);
+  display: inline-block;
+  margin: 12px 0;
+}
+
+.address {
+  font-size: 9px;
+  word-break: break-all;
+  display: block;
+  color: var(--foreground-inverse);
+}
+
+.address-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0;
+  justify-content: center;
+}
+
+.copy-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+  cursor: pointer;
+  color: var(--foreground-inverse);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+}
+
+.copy-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.donation-desc {
+  font-size: 11px;
+  opacity: 0.7;
+  line-height: 1.5;
 }

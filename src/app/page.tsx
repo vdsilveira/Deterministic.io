@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useLanguage } from '@/context/LanguageContext';
 
 const translations = {
   'pt-BR': {
@@ -16,25 +17,23 @@ const translations = {
       { badge: 'BIP49', desc: 'Nested SegWit\n3...' },
       { badge: 'BIP86', desc: 'Taproot\nbc1p...' },
     ],
-    warning: '⚠️ Aviso: Este site é apenas para fins educacionais. Não use com valores reais.',
-  },
-  en: {
-    heroSubtitle: 'Securely generate Bitcoin addresses from 11 texts or files. Each field = 1 input. Fill all 11 fields.',
-    cta: 'Get Started',
-    ctaDesc: 'Ready to Generate?',
-    ctaButton: 'Get Started →',
-    trust: ['🔒 Client-side only', '⚡ Fast generation', '🔑 BIP84/49/86'] as const,
-    features: [
-      { badge: 'BIP84', desc: 'Native SegWit\nbc1q...' },
-      { badge: 'BIP49', desc: 'Nested SegWit\n3...' },
-      { badge: 'BIP86', desc: 'Taproot\nbc1p...' },
-    ],
-    warning: '⚠️ Warning: This site is for educational purposes only. Do not use with real funds.',
-  },
+   },
+   en: {
+     heroSubtitle: 'Securely generate Bitcoin addresses from 11 texts or files. Each field = 1 input. Fill all 11 fields.',
+     cta: 'Get Started',
+     ctaDesc: 'Ready to Generate?',
+     ctaButton: 'Get Started →',
+     trust: ['🔒 Client-side only', '⚡ Fast generation', '🔑 BIP84/49/86'] as const,
+     features: [
+       { badge: 'BIP84', desc: 'Native SegWit\nbc1q...' },
+       { badge: 'BIP49', desc: 'Nested SegWit\n3...' },
+       { badge: 'BIP86', desc: 'Taproot\nbc1p...' },
+     ],
+   },
 };
 
 export default function Home() {
-  const [language, setLanguage] = useState<'pt-BR' | 'en'>('pt-BR');
+  const { language, setLanguage } = useLanguage();
   const t = translations[language];
 
   return (
@@ -82,10 +81,6 @@ export default function Home() {
         ))}
       </div>
 
-      {/* Warning */}
-      <div className="warning">
-        <span className="warning-text">{t.warning}</span>
-      </div>
     </div>
   );
 }

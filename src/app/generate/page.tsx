@@ -1,9 +1,10 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
-import { processInputs } from '@/lib/bip39';
+import { processInputs, InputData } from '@/lib/bip39';
 import { mnemonicToSeed, deriveKeyPair } from '@/lib/bitcoin';
+import { useLanguage } from '@/context/LanguageContext';
 
 const translations = {
   'pt-BR': {
@@ -17,9 +18,9 @@ const translations = {
     resultAddresses: 'ENDEREÇOS',
     resultWif: 'CHAVE PRIVADA (WIF)',
     copy: 'Copiar',
-    downloadExecutable: 'Baixar Executável',
-    comingSoon: 'Em breve',
-    warning: '⚠️ Aviso: Este site é apenas para fins educacionais. Não use com valores reais.',
+    download: 'Download',
+    downloadDesc: 'Faça download e gere suas chaves offline',
+    entropyWarning: '⚠️ Aviso importante: Se você utilizar arquivos como fonte de entropia, deve manter os arquivos originais salvos. Devido à natureza da criptografia de hash, qualquer alteração nos arquivos impactará diretamente na geração determinística das chaves. Além disso, a ordem em que os arquivos são passados nos até 11 campos deve ser estritamente mantida.',
   },
   en: {
     back: '← Back',
@@ -32,9 +33,9 @@ const translations = {
     resultAddresses: 'ADDRESSES',
     resultWif: 'PRIVATE KEY (WIF)',
     copy: 'Copy',
-    downloadExecutable: 'Download Executable',
-    comingSoon: 'Coming Soon',
-    warning: '⚠️ Warning: This site is for educational purposes only. Do not use with real funds.',
+    download: 'Download',
+    downloadDesc: 'Download and generate your keys offline',
+    entropyWarning: '⚠️ Important Warning: If you use files as entropy sources, you must keep the original files saved. Due to the nature of hash cryptography, any modification to the files will directly impact the deterministic key generation. Additionally, the order in which files are passed in the up to 11 fields must be strictly maintained.',
   },
 };
 
@@ -43,6 +44,7 @@ interface InputField {
   type: 'text' | 'file';
   content: string;
   fileName?: string;
+  isBase64?: boolean;
 }
 
 export interface Result {
@@ -53,7 +55,7 @@ export interface Result {
 }
 
 export default function Generate() {
-  const [language, setLanguage] = useState<'pt-BR' | 'en'>('pt-BR');
+  const { language, setLanguage } = useLanguage();
   const t = translations[language];
 
   const [inputs, setInputs] = useState<InputField[]>(
@@ -74,16 +76,21 @@ export default function Generate() {
   const handleFileSelect = (id: number, file: File) => {
     const reader = new FileReader();
     reader.onload = (e) => {
+      const arrayBuffer = e.target?.result as ArrayBuffer;
+      const bytes = new Uint8Array(arrayBuffer);
+      const base64 = btoa(String.fromCharCode(...bytes));
+
       setInputs(prev => prev.map(input =>
         input.id === id ? {
-          id,
+          ...input,
           type: 'file',
-          content: e.target?.result as string || file.name,
-          fileName: file.name
+          content: base64,
+          fileName: file.name,
+          isBase64: true
         } : input
       ));
     };
-    reader.readAsText(file);
+    reader.readAsArrayBuffer(file);
   };
 
   const clearField = (id: number) => {
@@ -108,9 +115,12 @@ export default function Generate() {
 
     setLoading(true);
     try {
-      const textContent = inputs.map(i => i.content).join('\n');
+      const inputData: InputData[] = inputs.map(i => ({
+        content: i.content,
+        isBase64: i.isBase64 || false
+      }));
 
-      const processed = processInputs(textContent, []);
+      const processed = processInputs(inputData);
 
       if (!processed.seedPhrase) {
         throw new Error('Failed to generate seed phrase');
@@ -252,18 +262,19 @@ export default function Generate() {
         )}
       </div>
 
-      {/* Executable Download (Mocked) */}
+      {/* Download Section */}
       <div className="executable-section">
-        <button className="executable-btn disabled" disabled>
-          📦 {t.downloadExecutable}
-          <span className="coming-soon-badge">{t.comingSoon}</span>
-        </button>
+        <p className="executable-desc">{t.downloadDesc}</p>
+        <Link href="/download" className="executable-btn">
+          📦 {t.download}
+        </Link>
       </div>
 
-      {/* Warning */}
-      <div className="warning">
-        <span className="warning-text">{t.warning}</span>
+      {/* Entropy Warning */}
+      <div className="entropy-warning">
+        {t.entropyWarning}
       </div>
+
     </div>
   );
 }

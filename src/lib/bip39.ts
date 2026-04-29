@@ -1,9 +1,9 @@
 import { wordlist } from '@scure/bip39/wordlists/english';
 import { generateBlake3Hash, hashToWordIndex } from './blake3';
 
-export interface FileData {
-  name: string;
+export interface InputData {
   content: string;
+  isBase64: boolean;
 }
 
 export interface ProcessedInputs {
@@ -12,28 +12,16 @@ export interface ProcessedInputs {
   seedPhrase: string;
 }
 
-export function processInputs(text: string, files: FileData[]): ProcessedInputs {
-  const inputs: string[] = [];
-
-  const lines = text.split('\n').filter(line => line.trim().length > 0);
-  for (const line of lines) {
-    inputs.push(line);
-  }
-
-  for (const file of files) {
-    inputs.push(file.content);
-  }
-
-  // Garantir exatamente 11 inputs (preencher com strings vazias se necessário)
-  while (inputs.length < 11) {
-    inputs.push('');
-  }
-
+export function processInputs(inputs: InputData[]): ProcessedInputs {
+  // Garantir exatamente 11 inputs
   const inputs11 = inputs.slice(0, 11);
+  while (inputs11.length < 11) {
+    inputs11.push({ content: '', isBase64: false });
+  }
 
   const words: string[] = [];
   for (const input of inputs11) {
-    const hash = generateBlake3Hash(input);
+    const hash = generateBlake3Hash(input.content, input.isBase64);
     const index = hashToWordIndex(hash);
     words.push(wordlist[index]);
   }
@@ -56,7 +44,7 @@ export function processInputs(text: string, files: FileData[]): ProcessedInputs 
   }
 
   return {
-    inputs: inputs11,
+    inputs: inputs11.map(i => i.content),
     words,
     seedPhrase: words.join(' '),
   };

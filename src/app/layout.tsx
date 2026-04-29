@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { LanguageProvider } from '@/context/LanguageContext';
+import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: 'Deterministic - BTC Key Generator',
@@ -23,7 +25,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body>{children}</body>
+      <body>
+        <LanguageProvider>
+          {children}
+          <Footer />
+        </LanguageProvider>
+      </body>
     </html>
   );
 }
