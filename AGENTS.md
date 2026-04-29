@@ -45,6 +45,7 @@ site/
 - Client-side only - sem dados sensíveis para servidores
 - 11 campos obrigatórios (texto ou arquivo)
 - Same-origin derivation: hashTRansform.js logic
+- NUNCA rodar comandos de build sem autorização explícita do usuário
 
 ## MCPs Ativos
 

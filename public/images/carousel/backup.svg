@@ -1,35 +1,45 @@
 <svg width="1200" height="400" xmlns="http://www.w3.org/2000/svg">
-  <rect width="1200" height="400" fill="#FCFAF7"/>
-  
-  <!-- Circuit pattern claro -->
   <defs>
-    <pattern id="circuit2" width="60" height="60" patternUnits="userSpaceOnUse">
+    <pattern id="circuit" width="60" height="60" patternUnits="userSpaceOnUse">
       <circle cx="30" cy="30" r="2" fill="rgba(255,152,0,0.3)"/>
       <path d="M 30 0 L 30 28 M 30 32 L 30 60 M 0 30 L 28 30 M 32 30 L 60 30" stroke="rgba(255,152,0,0.2)" stroke-width="1"/>
     </pattern>
-  </defs>
-  <rect width="1200" height="400" fill="url(#circuit2)"/>
-  
-  <!-- Brain -->
-  <ellipse cx="350" cy="200" rx="60" ry="40" fill="none" stroke="#FF9800" stroke-width="2"/>
-  <path d="M 320 180 Q 350 160 380 180" fill="none" stroke="#FF9800" stroke-width="2"/>
-  <path d="M 320 220 Q 350 240 380 220" fill="none" stroke="#FF9800" stroke-width="2"/>
-  <circle cx="335" cy="200" r="3" fill="#FF9800"/>
-  <circle cx="365" cy="200" r="3" fill="#FF9800"/>
-  
-  <!-- Cloud/File -->
-  <path d="M 650 180 Q 650 160 670 160 L 730 160 Q 750 160 750 180 L 750 200 Q 750 220 730 220 L 670 220 Q 650 220 650 200 Z" fill="none" stroke="#FF9800" stroke-width="2"/>
-  <path d="M 680 190 L 720 190 M 680 200 L 720 200" stroke="#FF9800" stroke-width="2"/>
-  
-  <!-- Arrow -->
-  <path d="M 430 200 L 620 200" stroke="#FF9800" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
-  <defs>
-    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+    <marker id="arrow-orange" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
       <polygon points="0 0, 10 3, 0 6" fill="#FF9800"/>
     </marker>
   </defs>
+  <rect width="1200" height="400" fill="url(#circuit)" />
   
-  <!-- Shield with check -->
-  <path d="M 950 180 L 950 160 Q 950 140 970 140 L 1030 140 Q 1050 140 1050 160 L 1050 180 Q 1050 220 1000 240 Q 950 220 950 180 Z" fill="none" stroke="#FF9800" stroke-width="2"/>
-  <path d="M 970 195 L 985 210 L 1030 175" fill="none" stroke="#FF9800" stroke-width="3" stroke-linecap="round"/>
+  <style>
+    .bp-line { fill: none; stroke: #FF9800; stroke-width: 2.5; }
+    .bp-text { fill: #FF9800; font-family: 'Courier New', Courier, monospace; font-size: 13; text-anchor: middle; }
+    .bp-text-bold { fill: #FF9800; font-family: 'Courier New', Courier, monospace; font-size: 15; font-weight: bold; text-anchor: middle; }
+    .bp-filled { fill: #FF9800; stroke: none; }
+  </style>
+  
+  <g transform="translate(350, 90)">
+    <rect class="bp-line" x="20" y="30" width="170" height="70" rx="8" />
+    <text x="105" y="55" class="bp-text-bold">BRAIN</text>
+    <text x="105" y="75" class="bp-text">(Memorized)</text>
+    <text x="105" y="90" class="bp-text" font-size="11">"Any unique phrase"</text>
+    
+    <rect class="bp-line" x="20" y="120" width="170" height="70" rx="8" />
+    <text x="105" y="145" class="bp-text-bold">FILES</text>
+    <text x="105" y="165" class="bp-text">(Your natural</text>
+    <text x="105" y="180" class="bp-text">backups)</text>
+    
+    <circle class="bp-line" cx="295" cy="110" r="45" stroke-dasharray="8,5" />
+    <rect class="bp-line" x="280" y="105" width="30" height="25" rx="3" />
+    <path class="bp-line" d="M285,105 v-10 a10,10 0 0,1 20,0 v10" stroke-width="2" />
+    
+    <path class="bp-line" d="M190,65 c40,0 40,45 60,45" stroke-dasharray="3,3" />
+    <path class="bp-line" d="M190,155 c40,0 40,-45 60,-45" stroke-dasharray="3,3" />
+
+    <line class="bp-line" x1="340" y1="110" x2="390" y2="110" />
+    <polygon class="bp-filled" points="395,110 388,106 388,114" /> 
+    
+    <rect class="bp-line" x="400" y="85" width="90" height="50" rx="5" />
+    <text x="445" y="105" class="bp-text-bold">SEED</text>
+    <text x="445" y="122" class="bp-text" font-size="10">SECURE</text>
+  </g>
 </svg>

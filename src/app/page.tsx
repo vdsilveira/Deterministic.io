@@ -7,24 +7,30 @@ import { useLanguage } from '@/context/LanguageContext';
 
 const translations = {
   'pt-BR': {
-    heroSubtitle: 'Gere endereços Bitcoin seguros a partir de 11 textos ou arquivos. Cada campo = 1 input. Preencha de 4 a 11 campos para gerar.',
+    heroSubtitle: {
+      main: 'Experiência descomplicada para gerar sua carteira Bitcoin.',
+      sub: 'Sua mente e seus arquivos são tudo o que você precisa'
+    },
     cta: 'Começar',
     ctaDesc: 'Pronto para gerar?',
     ctaButton: 'Get Started →',
     visionContent: [
-      { title: 'Insumos Customizáveis', text: 'Diferente do padrão BIP39, aqui você escolhe. Use frases memoráveis ou arquivos. Com apenas 4 campos, sua semente ganha vida.', image: '/images/carousel/insumos.svg' },
+      { title: 'Insumos Customizáveis', text: 'Diferente do padrão BIP39, aqui você escolhe. Use frases memoráveis ou arquivos. A partir de 4 inputs, sua semente ganha vida.', image: '/images/carousel/insumos.svg' },
       { title: 'Backup Mental e Digital', text: 'Sua chave está na sua cabeça ou em arquivos que você já faz backup naturalmente. É a prova de perdas físicas.', image: '/images/carousel/backup.svg' },
       { title: 'Execução Client-Side', text: 'Processo matemático fixo. Tudo ocorre offline no navegador: não vemos seus dados, não guardamos sua privacidade.', image: '/images/carousel/clientside.svg' }
     ],
     visionClosing: 'Segurança não precisa ser difícil. Precisa ser lógica.'
    },
-   en: {
-     heroSubtitle: 'Securely generate Bitcoin addresses from 11 texts or files. Each field = 1 input. Fill 4 to 11 fields to generate.',
+    en: {
+      heroSubtitle: {
+        main: 'Simplified experience to generate your Bitcoin wallet.',
+        sub: 'Your mind and your files are all you need'
+      },
      cta: 'Get Started',
      ctaDesc: 'Ready to Generate?',
      ctaButton: 'Get Started →',
      visionContent: [
-       { title: 'Customizable Inputs', text: 'Unlike BIP39 standard, here you choose. Use memorable phrases or files. With just 4 fields, your seed comes to life.', image: '/images/carousel/insumos.svg' },
+        { title: 'Customizable Inputs', text: 'Unlike BIP39 standard, here you choose. Use memorable phrases or files. Starting from 4 inputs, your seed comes to life.', image: '/images/carousel/insumos.svg' },
        { title: 'Mental & Digital Backup', text: 'Your key is in your head or in files you already naturally backup. Proof against physical losses.', image: '/images/carousel/backup.svg' },
        { title: 'Client-Side Execution', text: 'Fixed mathematical process. Everything happens offline in the browser: we don\'t see your data, we don\'t store anything.', image: '/images/carousel/clientside.svg' }
      ],
@@ -69,7 +75,11 @@ export default function Home() {
             <Image src="/images/logo.png" alt="Deterministic" fill className="logo-img" />
           </div>
           <h1>Deterministic</h1>
-          <p>{t.heroSubtitle}</p>
+          <p>
+            <span style={{ fontWeight: 600, fontFamily: 'Inter, sans-serif' }}>{t.heroSubtitle.main}</span>
+            <br />
+            <span style={{ fontWeight: 400, fontFamily: 'Inter, sans-serif', opacity: 0.8 }}>{t.heroSubtitle.sub}</span>
+          </p>
         </div>
 
         {/* CTA Tile - White */}
