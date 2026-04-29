@@ -11,9 +11,9 @@ const translations = {
       main: 'Experiência descomplicada para gerar sua carteira Bitcoin.',
       sub: 'Sua mente e seus arquivos são tudo o que você precisa'
     },
-    cta: 'Começar',
-    ctaDesc: 'Pronto para gerar?',
-    ctaButton: 'Get Started →',
+      cta: 'Começar',
+      ctaDesc: 'Pronto para gerar?',
+      ctaButton: 'Começar →',
     visionContent: [
       { title: 'Insumos Customizáveis', text: 'Diferente do padrão BIP39, aqui você escolhe. Use frases memoráveis ou arquivos. A partir de 4 inputs, sua semente ganha vida.', image: '/images/carousel/insumos.svg' },
       { title: 'Backup Mental e Digital', text: 'Sua chave está na sua cabeça ou em arquivos que você já faz backup naturalmente. É a prova de perdas físicas.', image: '/images/carousel/backup.svg' },

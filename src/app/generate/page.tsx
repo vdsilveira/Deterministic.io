@@ -11,7 +11,7 @@ const translations = {
     back: '← Voltar',
     title: 'Gerar Chaves',
     inputPlaceholder: (id: number) => `Campo ${id}: Digite texto ou carregue arquivo...`,
-    error: (count: number) => `Você precisa preencher todos os 11 campos. Atual: ${count}/11`,
+    error: (count: number) => `Você precisa preencher pelo menos 4 campos. Atual: ${count}/11`,
     clearAll: 'Limpar Tudo',
     generate: 'GERAR CHAVES',
     generating: 'GERANDO...',
@@ -21,12 +21,13 @@ const translations = {
     download: 'Download',
     downloadDesc: 'Faça download e gere suas chaves offline',
     entropyWarning: '⚠️ Aviso importante: Se você utilizar arquivos como fonte de entropia, deve manter os arquivos originais salvos. Devido à natureza da criptografia de hash, qualquer alteração nos arquivos impactará diretamente na geração determinística das chaves. Além disso, a ordem em que os arquivos são passados nos até 11 campos deve ser estritamente mantida.',
+    securityNote: 'Quanto mais campos únicos você preencher, mais segura será sua semente.',
   },
   en: {
     back: '← Back',
     title: 'Generate Keys',
     inputPlaceholder: (id: number) => `Field ${id}: Type text or upload file...`,
-    error: (count: number) => `You need to fill all 11 fields. Current: ${count}/11`,
+    error: (count: number) => `You need to fill at least 4 fields. Current: ${count}/11`,
     clearAll: 'Clear All',
     generate: 'GENERATE KEYS',
     generating: 'GENERATING...',
@@ -36,6 +37,7 @@ const translations = {
     download: 'Download',
     downloadDesc: 'Download and generate your keys offline',
     entropyWarning: '⚠️ Important Warning: If you use files as entropy sources, you must keep the original files saved. Due to the nature of hash cryptography, any modification to the files will directly impact the deterministic key generation. Additionally, the order in which files are passed in the up to 11 fields must be strictly maintained.',
+    securityNote: 'The more unique fields you fill, the more secure your seed will be.',
   },
 };
 
@@ -76,9 +78,9 @@ export default function Generate() {
   const handleFileSelect = (id: number, file: File) => {
     const reader = new FileReader();
     reader.onload = (e) => {
-      const arrayBuffer = e.target?.result as ArrayBuffer;
-      const bytes = new Uint8Array(arrayBuffer);
-      const base64 = btoa(String.fromCharCode(...bytes));
+      const dataUrl = e.target?.result as string;
+      // dataUrl format: "data:application/octet-stream;base64,ACTUAL_BASE64"
+      const base64 = dataUrl.split(',')[1]; // Extrai apenas a parte base64
 
       setInputs(prev => prev.map(input =>
         input.id === id ? {
@@ -90,7 +92,7 @@ export default function Generate() {
         } : input
       ));
     };
-    reader.readAsArrayBuffer(file);
+    reader.readAsDataURL(file);
   };
 
   const clearField = (id: number) => {
@@ -105,10 +107,10 @@ export default function Generate() {
     setError('');
   };
 
-  const handleGenerate = async () => {
+    const handleGenerate = async () => {
     setError('');
 
-    if (filledCount < 11) {
+    if (filledCount < 4) {
       setError(t.error(filledCount));
       return;
     }
@@ -167,13 +169,26 @@ export default function Generate() {
 
       <div className="generate-header">
         <h1>{t.title}</h1>
+        {t.securityNote && (
+          <p style={{ 
+            fontSize: '14px', 
+            color: filledCount >= 4 ? '#000' : '#FF9800',
+            marginTop: '8px', 
+            fontWeight: filledCount >= 4 ? 700 : 400 
+          }}>
+            {t.securityNote}
+          </p>
+        )}
       </div>
-
+      
       {/* Input Tile */}
       <div className="input-tile">
         <div className="input-header">
           <span className="input-label">INPUTS</span>
-          <span className={`input-count ${filledCount >= 11 ? 'complete' : ''}`}>
+          <span className={`input-count ${filledCount >= 4 ? 'complete' : ''}`} style={{ 
+            color: filledCount >= 4 ? '#000' : '#FF9800',
+            fontWeight: filledCount >= 4 ? 700 : 400 
+          }}>
             {filledCount}/11
           </span>
         </div>
@@ -182,24 +197,44 @@ export default function Generate() {
           {inputs.map((input) => (
             <div key={input.id} className={`field-row ${input.content ? 'filled' : ''}`}>
               <span className="field-number">[{input.id}]</span>
-              <textarea
-                className="field-input"
-                placeholder={t.inputPlaceholder(input.id)}
-                value={input.type === 'text' ? input.content : ''}
-                onChange={(e) => updateInput(input.id, e.target.value)}
-                disabled={input.type === 'file'}
-              />
-              <label className="file-btn">
-                <span>📁</span>
-                <input
-                  type="file"
-                  className="file-input-hidden"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) handleFileSelect(input.id, file);
-                  }}
-                />
-              </label>
+              
+              {input.type === 'text' ? (
+                <>
+                  <textarea
+                    className="field-input"
+                    placeholder={t.inputPlaceholder(input.id)}
+                    value={input.content}
+                    onChange={(e) => updateInput(input.id, e.target.value)}
+                  />
+                  <label className="file-btn">
+                    <span>📁</span>
+                    <input
+                      type="file"
+                      className="file-input-hidden"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) handleFileSelect(input.id, file);
+                      }}
+                    />
+                  </label>
+                </>
+              ) : (
+                <>
+                  <label className="file-btn">
+                    <span>📁</span>
+                    <input
+                      type="file"
+                      className="file-input-hidden"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) handleFileSelect(input.id, file);
+                      }}
+                    />
+                  </label>
+                  <span className="file-name">{input.fileName}</span>
+                </>
+              )}
+              
               <button
                 className="clear-btn"
                 onClick={() => clearField(input.id)}
@@ -217,11 +252,11 @@ export default function Generate() {
           <button className="btn-secondary" onClick={clearAll}>
             {t.clearAll}
           </button>
-          <button
-            className="generate-button"
-            onClick={handleGenerate}
-            disabled={filledCount < 11 || loading}
-          >
+            <button
+              className="generate-button"
+              onClick={handleGenerate}
+              disabled={filledCount < 4 || loading}
+            >
             {loading ? t.generating : t.generate}
           </button>
         </div>
