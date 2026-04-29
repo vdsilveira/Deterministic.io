@@ -1,0 +1,26 @@
+<svg width="1200" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="400" fill="#000000"/>
+  
+  <!-- Brain -->
+  <ellipse cx="350" cy="200" rx="60" ry="40" fill="none" stroke="#F7931A" stroke-width="2"/>
+  <path d="M 320 180 Q 350 160 380 180" fill="none" stroke="#F7931A" stroke-width="2"/>
+  <path d="M 320 220 Q 350 240 380 220" fill="none" stroke="#F7931A" stroke-width="2"/>
+  <circle cx="335" cy="200" r="3" fill="#F7931A"/>
+  <circle cx="365" cy="200" r="3" fill="#F7931A"/>
+  
+  <!-- Cloud/File -->
+  <path d="M 650 180 Q 650 160 670 160 L 730 160 Q 750 160 750 180 L 750 200 Q 750 220 730 220 L 670 220 Q 650 220 650 200 Z" fill="none" stroke="#F7931A" stroke-width="2"/>
+  <path d="M 680 190 L 720 190 M 680 200 L 720 200" stroke="#F7931A" stroke-width="2"/>
+  
+  <!-- Arrow -->
+  <path d="M 430 200 L 620 200" stroke="#F7931A" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#F7931A"/>
+    </marker>
+  </defs>
+  
+  <!-- Shield with check -->
+  <path d="M 950 180 L 950 160 Q 950 140 970 140 L 1030 140 Q 1050 140 1050 160 L 1050 180 Q 1050 220 1000 240 Q 950 220 950 180 Z" fill="none" stroke="#F7931A" stroke-width="2"/>
+  <path d="M 970 195 L 985 210 L 1030 175" fill="none" stroke="#F7931A" stroke-width="3" stroke-linecap="round"/>
+</svg>

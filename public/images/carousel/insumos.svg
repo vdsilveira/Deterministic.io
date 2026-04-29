@@ -1,0 +1,22 @@
+<svg width="1200" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="400" fill="#000000"/>
+  <!-- Grid pattern -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(247,147,26,0.15)" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="400" fill="url(#grid)"/>
+  
+  <!-- Input boxes -->
+  <rect x="250" y="160" width="200" height="40" rx="5" fill="none" stroke="#F7931A" stroke-width="2"/>
+  <rect x="500" y="160" width="200" height="40" rx="5" fill="none" stroke="#F7931A" stroke-width="2"/>
+  
+  <!-- Plus signs -->
+  <text x="470" y="185" font-family="Arial, sans-serif" font-size="24" fill="#F7931A" text-anchor="middle">+</text>
+  <text x="720" y="185" font-family="Arial, sans-serif" font-size="24" fill="#F7931A" text-anchor="middle">+</text>
+  
+  <!-- Seed icon -->
+  <circle cx="900" cy="180" r="30" fill="none" stroke="#F7931A" stroke-width="2"/>
+  <path d="M 900 165 L 900 195 M 885 180 L 915 180" stroke="#F7931A" stroke-width="3" stroke-linecap="round"/>
+</svg>

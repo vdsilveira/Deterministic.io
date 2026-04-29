@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 const translations = {
   'pt-BR': {
@@ -54,9 +55,19 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer-content">
+        {/* Lottie Animation - Top Right */}
+        <div className="footer-lottie">
+          <DotLottieReact
+            src="https://lottie.host/c3d57b41-1027-4012-b09a-e7ff07580d64/6HkMtjEyi6.lottie"
+            loop
+            autoplay
+            style={{ width: '200px', height: '200px' }}
+          />
+        </div>
+      
         <h2 className="footer-title">{t.title}</h2>
         <p className="footer-subtitle">{t.subtitle}</p>
-        
+         
         <div className="donation-grid">
           {/* On-chain */}
           <div className="donation-card">
