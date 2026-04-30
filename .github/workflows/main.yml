@@ -31,10 +31,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          # Aponta para o arquivo de trava dentro da subpasta para o cache funcionar
           cache: 'npm'
+          cache-dependency-path: './Deterministic.exec/package-lock.json'
 
       - name: Install Frontend dependencies
+        # Entra na pasta antes de rodar o npm install
         run: npm install
+        working-directory: './Deterministic.exec'
 
       - name: Build Tauri App
         uses: tauri-apps/tauri-action@v0
@@ -46,5 +50,5 @@ jobs:
           releaseBody: 'Versão estável e offline do Deterministic.online'
           releaseDraft: true
           prerelease: false
-          # Ajuste o caminho para a sua pasta do executável
+          # Define onde está o tauri.conf.json e o src-tauri
           projectPath: './Deterministic.exec'
