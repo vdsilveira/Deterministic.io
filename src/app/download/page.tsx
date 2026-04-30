@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 
 const translations = {
@@ -14,7 +13,15 @@ const translations = {
     linux: 'Linux',
     windows: 'Windows',
     mac: 'Mac',
-    downloadFor: 'Download para',
+    downloads: {
+      deb: { label: 'Debian / Ubuntu (.deb)', userType: 'Usuários de Ubuntu, Debian, Mint' },
+      rpm: { label: 'Fedora / RedHat (.rpm)', userType: 'Usuários de Fedora, RedHat, openSUSE' },
+      appimage: { label: 'Linux Universal (.AppImage)', userType: 'Qualquer Linux (Não precisa instalar)' },
+      exe: { label: 'Instalador Windows (.exe)', userType: 'Maioria dos usuários de Windows' },
+      msi: { label: 'Windows Installer (.msi)', userType: 'Instalações gerenciadas/corporativas' },
+      dmg: { label: 'Instalador macOS (.dmg)', userType: 'Instalador padrão para Mac' },
+      tarball: { label: 'Binário macOS (.tar.gz)', userType: 'Binário direto para Mac' },
+    },
   },
   en: {
     title: 'Download',
@@ -24,7 +31,15 @@ const translations = {
     linux: 'Linux',
     windows: 'Windows',
     mac: 'Mac',
-    downloadFor: 'Download for',
+    downloads: {
+      deb: { label: 'Debian / Ubuntu (.deb)', userType: 'For Ubuntu, Debian, Mint users' },
+      rpm: { label: 'Fedora / RedHat (.rpm)', userType: 'For Fedora, RedHat, openSUSE users' },
+      appimage: { label: 'Linux Universal (.AppImage)', userType: 'Any Linux (No installation required)' },
+      exe: { label: 'Windows Installer (.exe)', userType: 'For most Windows users' },
+      msi: { label: 'Windows Installer (.msi)', userType: 'Managed/Corporate installations' },
+      dmg: { label: 'macOS Installer (.dmg)', userType: 'Standard installer for Mac' },
+      tarball: { label: 'macOS Binary (.tar.gz)', userType: 'Direct binary for Mac' },
+    },
   },
 };
 
@@ -62,25 +77,50 @@ export default function Download() {
         <div className="download-card">
           <Image src="/images/linux-logo.png" alt="Linux" width={80} height={80} className="os-logo-img" />
           <h3>{t.linux}</h3>
-          <Link href="#linux" className="download-card-link">
-            {t.downloadFor} {t.linux}
-          </Link>
+          <div className="download-links">
+            <a href="/builds/Deterministic.exec_1.0.0_amd64.deb" className="download-card-link" download>
+              <span className="download-label">{t.downloads.deb.label}</span>
+              <span className="download-user-type">{t.downloads.deb.userType}</span>
+            </a>
+            <a href="/builds/Deterministic.exec-1.0.0-1.x86_64.rpm" className="download-card-link" download>
+              <span className="download-label">{t.downloads.rpm.label}</span>
+              <span className="download-user-type">{t.downloads.rpm.userType}</span>
+            </a>
+            <a href="/builds/Deterministic.exec_1.0.0_amd64.AppImage" className="download-card-link" download>
+              <span className="download-label">{t.downloads.appimage.label}</span>
+              <span className="download-user-type">{t.downloads.appimage.userType}</span>
+            </a>
+          </div>
         </div>
 
         <div className="download-card">
           <Image src="/images/windows-logo.png" alt="Windows" width={80} height={80} className="os-logo-img" />
           <h3>{t.windows}</h3>
-          <Link href="#windows" className="download-card-link">
-            {t.downloadFor} {t.windows}
-          </Link>
+          <div className="download-links">
+            <a href="/builds/Deterministic.exec_1.0.0_x64-setup.exe" className="download-card-link" download>
+              <span className="download-label">{t.downloads.exe.label}</span>
+              <span className="download-user-type">{t.downloads.exe.userType}</span>
+            </a>
+            <a href="/builds/Deterministic.exec_1.0.0_x64_en-US.msi" className="download-card-link" download>
+              <span className="download-label">{t.downloads.msi.label}</span>
+              <span className="download-user-type">{t.downloads.msi.userType}</span>
+            </a>
+          </div>
         </div>
 
         <div className="download-card">
           <Image src="/images/MAC-logo.png" alt="Mac" width={80} height={80} className="os-logo-img" />
           <h3>{t.mac}</h3>
-          <Link href="#mac" className="download-card-link">
-            {t.downloadFor} {t.mac}
-          </Link>
+          <div className="download-links">
+            <a href="/builds/Deterministic.exec_1.0.0_aarch64.dmg" className="download-card-link" download>
+              <span className="download-label">{t.downloads.dmg.label}</span>
+              <span className="download-user-type">{t.downloads.dmg.userType}</span>
+            </a>
+            <a href="/builds/Deterministic.exec.app.tar.gz" className="download-card-link" download>
+              <span className="download-label">{t.downloads.tarball.label}</span>
+              <span className="download-user-type">{t.downloads.tarball.userType}</span>
+            </a>
+          </div>
         </div>
       </div>
 

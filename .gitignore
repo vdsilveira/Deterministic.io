@@ -1,4 +1,4 @@
-# Dependências
+# Dependencies
 node_modules/
 package-lock.json
 pnpm-lock.yaml
@@ -8,7 +8,7 @@ yarn.lock
 .next/
 out/
 
-# Ambiente e logs
+# Environment e logs
 .env
 .env*.local
 *.log
@@ -23,3 +23,9 @@ Thumbs.db
 # Testes (Playwright)
 playwright-report/
 test-results/
+
+# Builds (executáveis grandes - não trackar)
+public/builds/
+
+# OpenCode
+.opencode/

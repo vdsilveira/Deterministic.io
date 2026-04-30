@@ -734,7 +734,10 @@ body {
 }
 
 .download-card-link {
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
   padding: 10px 20px;
   background: var(--accent-primary);
   border-radius: var(--rounded-full);
@@ -743,10 +746,33 @@ body {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+  min-height: 44px;
+  justify-content: center;
+}
+
+.download-label {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.download-user-type {
+  font-size: 10px;
+  font-weight: 400;
+  opacity: 0.8;
+  line-height: 1.2;
 }
 
 .download-card-link:hover {
   opacity: 0.9;
+}
+
+.download-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  margin-top: 4px;
 }
 
 .entropy-warning {
