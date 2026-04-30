@@ -69,7 +69,7 @@ export default function Home() {
 
       {/* Hero Grid - Bento Style */}
       <div className="hero-grid">
-        {/* Title Tile - Inverse */}
+        {/* Title Tile - Left (Logo + Title + Subtitle) */}
         <div className="title-tile">
           <div className="logo-bg">
             <Image src="/images/logo.png" alt="Deterministic" fill className="logo-img" />
@@ -82,13 +82,7 @@ export default function Home() {
           </p>
         </div>
 
-        {/* CTA Tile - White */}
-        <div className="cta-tile">
-          <span className="cta-desc">{t.ctaDesc}</span>
-          <Link href="/generate" className="cta-button">{t.ctaButton}</Link>
-        </div>
-
-        {/* Wallet Image Tile */}
+        {/* Wallet Image Tile - Center */}
         <div className="wallet-image-tile">
           <div className="wallet-image-bg">
             <Image 
@@ -102,6 +96,12 @@ export default function Home() {
           <div className="coming-soon-overlay">
             <span className="coming-soon-text">Coming Soon</span>
           </div>
+        </div>
+
+        {/* CTA Tile - Right (Button) */}
+        <div className="cta-tile">
+          <span className="cta-desc">{t.ctaDesc}</span>
+          <Link href="/generate" className="cta-button">{t.ctaButton}</Link>
         </div>
       </div>
 
