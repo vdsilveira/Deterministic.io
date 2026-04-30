@@ -94,10 +94,14 @@ export default function Home() {
             <Image 
               src="/images/logowallet.png" 
               alt="Bitcoin Wallet" 
-              fill
+              width={120}
+              height={120}
               className="wallet-img"
               onError={(e) => { (e.target as HTMLImageElement).src = '/images/logo.png'; }}
             />
+          </div>
+          <div className="coming-soon-overlay">
+            <span className="coming-soon-text">Coming Soon</span>
           </div>
         </div>
       </div>

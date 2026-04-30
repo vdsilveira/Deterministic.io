@@ -37,3 +37,6 @@ export async function GET(request: NextRequest) {
   
   return NextResponse.json({ error: 'Document not found' }, { status: 404 });
 }
+
+// Force dynamic to avoid static generation issues
+export const dynamic = 'force-dynamic';
