@@ -162,8 +162,8 @@ export default function Generate() {
           <button className="lang-toggle" onClick={() => setLanguage(language === 'pt-BR' ? 'en' : 'pt-BR')}>
             {language === 'pt-BR' ? '🇺🇸 EN' : '🇧🇷 PT'}
           </button>
-          <a href="https://github.com/vdsilveira/Deterministic.io" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://github.com/vdsilveira/Deterministic.io#readme" target="_blank" rel="noopener noreferrer">Docs</a>
+          <a href="https://github.com/vdsilveira/Deterministic.Online" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href="https://vdsilveira.gitbook.io/documents" target="_blank" rel="noopener noreferrer">Docs</a>
         </div>
       </div>
 
