@@ -94,8 +94,7 @@ export default function Home() {
             <Image 
               src="/images/logowallet.png" 
               alt="Bitcoin Wallet" 
-              width={120}
-              height={120}
+              fill
               className="wallet-img"
               onError={(e) => { (e.target as HTMLImageElement).src = '/images/logo.png'; }}
             />
