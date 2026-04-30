@@ -35,9 +35,39 @@ body {
 
 /* Hero Grid - Bento Style */
 .hero-grid {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 16px;
   margin-bottom: 16px;
+}
+
+/* Wallet Image Tile */
+.wallet-image-tile {
+  background: var(--surface-secondary);
+  border-radius: var(--rounded-2xl);
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 250px;
+}
+
+.wallet-image-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.wallet-img {
+  object-fit: contain;
+  z-index: 1;
+  max-width: 80%;
+  max-height: 80%;
 }
 
 .hero-grid > * {

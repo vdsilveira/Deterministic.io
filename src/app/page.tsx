@@ -87,6 +87,19 @@ export default function Home() {
           <span className="cta-desc">{t.ctaDesc}</span>
           <Link href="/generate" className="cta-button">{t.ctaButton}</Link>
         </div>
+
+        {/* Wallet Image Tile */}
+        <div className="wallet-image-tile">
+          <div className="wallet-image-bg">
+            <Image 
+              src="/images/logowallet.png" 
+              alt="Bitcoin Wallet" 
+              fill
+              className="wallet-img"
+              onError={(e) => { (e.target as HTMLImageElement).src = '/images/logo.png'; }}
+            />
+          </div>
+        </div>
       </div>
 
       {/* Vision Slideshow */}
