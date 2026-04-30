@@ -163,7 +163,7 @@ export default function Generate() {
             {language === 'pt-BR' ? '🇺🇸 EN' : '🇧🇷 PT'}
           </button>
           <a href="https://github.com/vdsilveira/Deterministic.Online" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a href="https://vdsilveira.gitbook.io/documents" target="_blank" rel="noopener noreferrer">Docs</a>
+          <Link href="/docs">Docs</Link>
         </div>
       </div>
 
